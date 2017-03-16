@@ -72,6 +72,10 @@
 
         reportState('suspended');
 
+        // onunload/onbeforeunload events can potentially steal the focused tab, which is irritating...
+        window.onbeforeunload = null;
+        window.onunload = null;
+
         if (suspendedUrl.indexOf('suspended.html') > 0) {
             window.location.replace(suspendedUrl);
         } else {
